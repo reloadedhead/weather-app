@@ -5,12 +5,15 @@ import Router from './Router';
 import { ErrorBoundary } from 'react-error-boundary';
 import ErrorFallback from './components/error-boundary';
 import LoadingPage from './components/loading';
+import AppShell from './components/layout';
 
 ReactDOM.render(
   <React.StrictMode>
     <ErrorBoundary FallbackComponent={ErrorFallback}>
       <Suspense fallback={LoadingPage}>
-        <Router />
+        <AppShell>
+          <Router />
+        </AppShell>
       </Suspense>
     </ErrorBoundary>
   </React.StrictMode>,
