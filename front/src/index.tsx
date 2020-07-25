@@ -6,14 +6,17 @@ import { ErrorBoundary } from 'react-error-boundary';
 import ErrorFallback from './components/error-boundary';
 import LoadingPage from './components/loading';
 import AppShell from './components/layout';
+import { WeatherProvider } from './context/weather';
 
 ReactDOM.render(
   <React.StrictMode>
     <ErrorBoundary FallbackComponent={ErrorFallback}>
       <Suspense fallback={LoadingPage}>
-        <AppShell>
-          <Router />
-        </AppShell>
+        <WeatherProvider>
+          <AppShell>
+            <Router />
+          </AppShell>
+        </WeatherProvider>
       </Suspense>
     </ErrorBoundary>
   </React.StrictMode>,
