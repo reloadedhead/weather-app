@@ -1,12 +1,12 @@
 import React, { lazy } from 'react';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 
-const AppShell = lazy(() => import('./components/layout'));
+const Weather = lazy(() => import('./components/weather'));
 
 const Router = () => (
   <BrowserRouter>
     <Switch>
-      <Route path={['/', '/weather']} component={AppShell} />
+      <Route path="/" component={Weather} />
       <Redirect to="/" />
     </Switch>
   </BrowserRouter>
