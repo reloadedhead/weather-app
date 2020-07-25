@@ -1,0 +1,9 @@
+.gitignore
+.gitattributes
+.prettierrc
+**/node_modules
+*.json
+*.md
+*.lock
+webpack.*.ts
+serviceWorker.ts
