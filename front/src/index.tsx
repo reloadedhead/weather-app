@@ -1,12 +1,18 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
 import * as serviceWorker from './serviceWorker';
+import Router from './Router';
+import { ErrorBoundary } from 'react-error-boundary';
+import ErrorFallback from './components/error-boundary';
+import LoadingPage from './components/loading';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <ErrorBoundary FallbackComponent={ErrorFallback}>
+      <Suspense fallback={LoadingPage}>
+        <Router />
+      </Suspense>
+    </ErrorBoundary>
   </React.StrictMode>,
   document.getElementById('root')
 );
