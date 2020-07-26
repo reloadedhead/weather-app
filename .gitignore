@@ -345,3 +345,4 @@ healthchecksdb
 /.DS_Store
 /.vscode
 yarn.lock
+.vscode
