@@ -24,6 +24,9 @@
     },
     "buttons": {
       "selectCity": "Seleccionar ciudad"
+    },
+    "forecast": {
+      "subheader": "Pronóstico extendido"
     }
   },
   "shared": {

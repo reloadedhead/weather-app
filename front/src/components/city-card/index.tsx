@@ -53,7 +53,7 @@ const useStyles = makeStyles(({ palette }) => ({
 
 export const CityCard = () => {
   const styles = useStyles();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const shadowStyles = useFadedShadowStyles();
   const borderedGridStyles = useGutterBorderedGridStyles({
     borderColor: 'rgba(0, 0, 0, 0.08)',
@@ -81,13 +81,13 @@ export const CityCard = () => {
         <Box p={2} flex={'auto'} className={borderedGridStyles.item}>
           <p className={styles.statLabel}>{t('weather.cityDetails.wind')}</p>
           <p className={styles.statValue}>
-            {(currentWeather && `${currentWeather.wind.toFixed(1)} KM/h`) || ''}
+            {(currentWeather && `${currentWeather.wind.toLocaleString(i18n.language)} KM/h`) || ''}
           </p>
         </Box>
         <Box p={2} flex={'auto'} className={borderedGridStyles.item}>
           <p className={styles.statLabel}>{t('weather.cityDetails.feelsLike')}</p>
           <p className={styles.statValue}>
-            {(currentWeather && `${currentWeather.feelsLike.toFixed(1)}°C`) || ''}
+            {(currentWeather && `${currentWeather.feelsLike.toLocaleString(i18n.language)}°C`) || ''}
           </p>
         </Box>
       </Box>

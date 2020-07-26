@@ -11,10 +11,12 @@ import {
   ListItemAvatar,
   Avatar,
   ListItemSecondaryAction,
+  ListSubheader,
 } from '@material-ui/core';
 import { useWeather } from '../../context/weather';
 import { format } from 'date-fns';
 import { es } from 'date-fns/locale';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles(() => ({
   card: {
@@ -33,13 +35,16 @@ interface DayForecast {
 }
 
 const DayForecast = ({ dayName, dayNumber, forecast, maxTemperature, minTemperature }: DayForecast) => {
+  const { i18n } = useTranslation();
   return (
     <ListItem>
       <ListItemAvatar>
         <Avatar>{dayNumber}</Avatar>
       </ListItemAvatar>
       <ListItemText primary={dayName} secondary={forecast} />
-      <ListItemSecondaryAction>{`${minTemperature} / ${maxTemperature}`}</ListItemSecondaryAction>
+      <ListItemSecondaryAction>{`${minTemperature.toLocaleString(
+        i18n.language
+      )}°C / ${maxTemperature.toLocaleString(i18n.language)}°C`}</ListItemSecondaryAction>
     </ListItem>
   );
 };
@@ -48,10 +53,11 @@ const ForecastCard = () => {
   const styles = useStyles();
   const shadowStyles = useFadedShadowStyles();
   const { forecast } = useWeather();
+  const { t } = useTranslation();
   return (
     <Card className={cx(styles.card, shadowStyles.root)}>
       <CardContent>
-        <List>
+        <List subheader={<ListSubheader>{t('weather.forecast.subheader')}</ListSubheader>}>
           {forecast &&
             forecast.map(forecastingDay => (
               <DayForecast
