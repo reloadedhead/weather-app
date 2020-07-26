@@ -8,7 +8,6 @@ import Avatar from '@material-ui/core/Avatar';
 import Divider from '@material-ui/core/Divider';
 import { useFadedShadowStyles } from '@mui-treasury/styles/shadow/faded';
 import { useGutterBorderedGridStyles } from '@mui-treasury/styles/grid/gutterBordered';
-import WbSunnyIcon from '@material-ui/icons/WbSunny';
 import { useWeather } from '../../context/weather';
 import { useTranslation } from 'react-i18next';
 import { CircularProgress } from '@material-ui/core';

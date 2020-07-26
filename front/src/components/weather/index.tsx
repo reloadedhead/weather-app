@@ -14,6 +14,9 @@ const useStyles = makeStyles((theme: Theme) =>
       bottom: theme.spacing(2),
       right: theme.spacing(2),
     },
+    card: {
+      marginBottom: theme.spacing(2),
+    },
   })
 );
 
@@ -24,11 +27,11 @@ const Weather = () => {
   const { t } = useTranslation();
   return (
     <div>
-      <Grid container item xs={12} spacing={3}>
-        <Grid item xs={12}>
+      <Grid container item xs={12}>
+        <Grid item xs={12} className={classes.card}>
           <CityCard />
         </Grid>
-        <Grid item xs={12}>
+        <Grid item xs={12} className={classes.card}>
           <ForecastCard />
         </Grid>
       </Grid>
