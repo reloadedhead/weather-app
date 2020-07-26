@@ -3,6 +3,7 @@ export interface Weather {
   feelsLike: number;
   wind: number;
   description: string;
+  icon: string;
 }
 
 export interface Forecast extends Partial<Weather> {

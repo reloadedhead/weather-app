@@ -11,6 +11,7 @@ import { useGutterBorderedGridStyles } from '@mui-treasury/styles/grid/gutterBor
 import WbSunnyIcon from '@material-ui/icons/WbSunny';
 import { useWeather } from '../../context/weather';
 import { useTranslation } from 'react-i18next';
+import { CircularProgress } from '@material-ui/core';
 
 const useStyles = makeStyles(({ palette }) => ({
   card: {
@@ -63,8 +64,11 @@ export const CityCard = () => {
   return (
     <Card className={cx(styles.card, shadowStyles.root)}>
       <CardContent>
-        <Avatar className={styles.avatar}>
-          <WbSunnyIcon />
+        <Avatar
+          className={styles.avatar}
+          src={currentWeather && `http://openweathermap.org/img/wn/${currentWeather.icon}@2x.png`}
+        >
+          <CircularProgress />
         </Avatar>
         <h3 className={styles.heading}>
           {(currentWeather && `${currentWeather.currentTemperature.toFixed(1)}°C`) || ''}

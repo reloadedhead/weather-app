@@ -58,6 +58,7 @@ export const WeatherProvider = ({ children }: WeatherProvider) => {
       feelsLike: current.feels_like,
       wind: current.wind_speed,
       description: current.weather[0].description,
+      icon: current.weather[0].icon,
     });
     setForecast(
       daily.map(f => ({
@@ -65,6 +66,7 @@ export const WeatherProvider = ({ children }: WeatherProvider) => {
         minTemperature: f.temp.min,
         maxTemperature: f.temp.max,
         description: f.weather[0].description,
+        icon: f.weather[0].icon,
       }))
     );
   };

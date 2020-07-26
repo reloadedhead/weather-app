@@ -32,14 +32,15 @@ interface DayForecast {
   forecast: string;
   maxTemperature: number;
   minTemperature: number;
+  icon?: string;
 }
 
-const DayForecast = ({ dayName, dayNumber, forecast, maxTemperature, minTemperature }: DayForecast) => {
+const DayForecast = ({ dayName, dayNumber, forecast, maxTemperature, minTemperature, icon }: DayForecast) => {
   const { i18n } = useTranslation();
   return (
     <ListItem>
       <ListItemAvatar>
-        <Avatar>{dayNumber}</Avatar>
+        <Avatar src={icon && `http://openweathermap.org/img/wn/${icon}@2x.png`}>{dayNumber}</Avatar>
       </ListItemAvatar>
       <ListItemText primary={dayName} secondary={forecast} />
       <ListItemSecondaryAction>{`${minTemperature.toLocaleString(
@@ -70,6 +71,7 @@ const ForecastCard = () => {
                 forecast={forecastingDay.description || ''}
                 maxTemperature={forecastingDay.maxTemperature || 0}
                 minTemperature={forecastingDay.minTemperature || 0}
+                icon={forecastingDay.icon}
               />
             ))}
         </List>
