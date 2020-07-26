@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import { CssBaseline, Grid, makeStyles, createStyles, Theme } from '@material-ui/core';
+import { CssBaseline, makeStyles, createStyles, Theme } from '@material-ui/core';
 import Header from './Header';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -25,9 +25,7 @@ const AppShell = ({ children }: AppShell) => {
       <Header title="Weather App" />
       <main className={classes.main}>
         <div className={classes.toolbar} />
-        <Grid container spacing={1} justify="center">
-          {children}
-        </Grid>
+        {children}
       </main>
     </div>
   );
