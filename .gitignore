@@ -346,3 +346,4 @@ healthchecksdb
 /.vscode
 yarn.lock
 .vscode
+build
