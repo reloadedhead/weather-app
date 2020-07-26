@@ -7,8 +7,9 @@ import ErrorFallback from './components/error-boundary';
 import LoadingPage from './components/loading';
 import AppShell from './components/layout';
 import { WeatherProvider } from './context/weather';
+import axiosConfig from './axios-config';
 
-ReactDOM.render(
+const App = () => (
   <React.StrictMode>
     <ErrorBoundary FallbackComponent={ErrorFallback}>
       <Suspense fallback={LoadingPage}>
@@ -19,9 +20,14 @@ ReactDOM.render(
         </WeatherProvider>
       </Suspense>
     </ErrorBoundary>
-  </React.StrictMode>,
-  document.getElementById('root')
+  </React.StrictMode>
 );
+
+const root = document.getElementById('root');
+if (root !== null) {
+  axiosConfig();
+  ReactDOM.render(<App />, root);
+}
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

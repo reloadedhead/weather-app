@@ -9,6 +9,7 @@ import Divider from '@material-ui/core/Divider';
 import { useFadedShadowStyles } from '@mui-treasury/styles/shadow/faded';
 import { useGutterBorderedGridStyles } from '@mui-treasury/styles/grid/gutterBordered';
 import WbSunnyIcon from '@material-ui/icons/WbSunny';
+import { useWeather } from '../../context/weather';
 
 const useStyles = makeStyles(({ palette }) => ({
   card: {
@@ -56,24 +57,31 @@ export const CityCard = () => {
     borderColor: 'rgba(0, 0, 0, 0.08)',
     height: '50%',
   });
+  const { currentWeather } = useWeather();
   return (
     <Card className={cx(styles.card, shadowStyles.root)}>
       <CardContent>
         <Avatar className={styles.avatar}>
           <WbSunnyIcon />
         </Avatar>
-        <h3 className={styles.heading}>13</h3>
+        <h3 className={styles.heading}>
+          {(currentWeather && `${currentWeather.currentTemperature.toFixed(1)}°C`) || ''}
+        </h3>
         <span className={styles.subheader}>en la ciudad de Tandil</span>
       </CardContent>
       <Divider light />
       <Box display={'flex'}>
         <Box p={2} flex={'auto'} className={borderedGridStyles.item}>
           <p className={styles.statLabel}>Viento</p>
-          <p className={styles.statValue}>10 Km/h</p>
+          <p className={styles.statValue}>
+            {(currentWeather && `${currentWeather.wind.toFixed(1)} KM/h`) || ''}
+          </p>
         </Box>
         <Box p={2} flex={'auto'} className={borderedGridStyles.item}>
           <p className={styles.statLabel}>Sensación térmica</p>
-          <p className={styles.statValue}>12</p>
+          <p className={styles.statValue}>
+            {(currentWeather && `${currentWeather.feelsLike.toFixed(1)}°C`) || ''}
+          </p>
         </Box>
       </Box>
     </Card>
