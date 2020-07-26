@@ -52,6 +52,11 @@ export const WeatherProvider = ({ children }: WeatherProvider) => {
     navigator.geolocation.getCurrentPosition(onSuccess, onError);
   };
 
+  /**
+   * Not ideal. User should be prompted explaining why his/her location is needed.
+   * We know is for weather...
+   * TODO: setCoordinates... should be inside a useCallback hook.
+   */
   useEffect(() => {
     setCoordinatesFromDevice();
     // eslint-disable-next-line
