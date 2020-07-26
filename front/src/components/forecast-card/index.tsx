@@ -12,6 +12,7 @@ import {
   Avatar,
   ListItemSecondaryAction,
   ListSubheader,
+  Collapse,
 } from '@material-ui/core';
 import { useWeather } from '../../context/weather';
 import { format } from 'date-fns';
@@ -53,30 +54,32 @@ const DayForecast = ({ dayName, dayNumber, forecast, maxTemperature, minTemperat
 const ForecastCard = () => {
   const styles = useStyles();
   const shadowStyles = useFadedShadowStyles();
-  const { forecast } = useWeather();
+  const { forecast, loading } = useWeather();
   const { t } = useTranslation();
   return (
-    <Card className={cx(styles.card, shadowStyles.root)}>
-      <CardContent>
-        <List subheader={<ListSubheader>{t('weather.forecast.subheader')}</ListSubheader>}>
-          {forecast &&
-            forecast.map(forecastingDay => (
-              <DayForecast
-                key={`day-${format(forecastingDay.day, 'dd')}`}
-                dayName={
-                  format(forecastingDay.day, 'eeee', { locale: es })[0].toUpperCase() +
-                  format(forecastingDay.day, 'eeee', { locale: es }).slice(1)
-                }
-                dayNumber={format(forecastingDay.day, 'dd')}
-                forecast={forecastingDay.description || ''}
-                maxTemperature={forecastingDay.maxTemperature || 0}
-                minTemperature={forecastingDay.minTemperature || 0}
-                icon={forecastingDay.icon}
-              />
-            ))}
-        </List>
-      </CardContent>
-    </Card>
+    <Collapse in={!loading} unmountOnExit>
+      <Card className={cx(styles.card, shadowStyles.root)}>
+        <CardContent>
+          <List subheader={<ListSubheader>{t('weather.forecast.subheader')}</ListSubheader>}>
+            {forecast &&
+              forecast.map(forecastingDay => (
+                <DayForecast
+                  key={`day-${format(forecastingDay.day, 'dd')}`}
+                  dayName={
+                    format(forecastingDay.day, 'eeee', { locale: es })[0].toUpperCase() +
+                    format(forecastingDay.day, 'eeee', { locale: es }).slice(1)
+                  }
+                  dayNumber={format(forecastingDay.day, 'dd')}
+                  forecast={forecastingDay.description || ''}
+                  maxTemperature={forecastingDay.maxTemperature || 0}
+                  minTemperature={forecastingDay.minTemperature || 0}
+                  icon={forecastingDay.icon}
+                />
+              ))}
+          </List>
+        </CardContent>
+      </Card>
+    </Collapse>
   );
 };
 

@@ -60,13 +60,14 @@ export const CityCard = () => {
     borderColor: 'rgba(0, 0, 0, 0.08)',
     height: '50%',
   });
-  const { currentWeather, city } = useWeather();
+  const { currentWeather, city, loading } = useWeather();
+  const showIcon = Boolean(currentWeather && !loading);
   return (
     <Card className={cx(styles.card, shadowStyles.root)}>
       <CardContent>
         <Avatar
           className={styles.avatar}
-          src={currentWeather && `http://openweathermap.org/img/wn/${currentWeather.icon}@2x.png`}
+          src={showIcon ? `http://openweathermap.org/img/wn/${currentWeather!.icon}@2x.png` : undefined}
         >
           <CircularProgress />
         </Avatar>
