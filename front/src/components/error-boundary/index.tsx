@@ -25,10 +25,12 @@ const ErrorFallback = ({ error }: FallbackProps) => {
       aria-labelledby="error-dialog-title"
       aria-describedby="error-dialog-description"
     >
-      <DialogTitle id="error-dialog-title">{`${t('errorBoundary.dialog.title')} ${error?.name}`}</DialogTitle>
+      <DialogTitle id="error-dialog-title">{`${t('errors.boundary.dialog.title')} ${
+        error?.name
+      }`}</DialogTitle>
       <DialogContent>
         <DialogContentText id="error-dialog-description">
-          {t('errorBoundary.dialog.description')}
+          {t('errors.boundary.dialog.description')}
           {error?.message}
         </DialogContentText>
         <DialogActions>

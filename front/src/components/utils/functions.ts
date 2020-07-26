@@ -1,3 +1,5 @@
+import { City } from '../../types';
+
 export const getCoordinatesForCity = (city: string) => {
   const Coordinates: { [key: string]: { latitude: number; longitude: number } } = {
     buenosaires: {
@@ -22,4 +24,16 @@ export const getCoordinatesForCity = (city: string) => {
     },
   };
   return Coordinates[city];
+};
+
+export const getCountryEmoji = (city: City) => {
+  const Emojis: { [key: string]: string } = {
+    current: '📍',
+    buenosaires: '🇦🇷',
+    newyork: '🇺🇸',
+    barcelona: '🇪🇸',
+    hongkong: '🇭🇰',
+    sidney: '🇦🇺',
+  };
+  return Emojis[city];
 };

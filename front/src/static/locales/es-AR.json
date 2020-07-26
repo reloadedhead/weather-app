@@ -1,0 +1,34 @@
+{
+  "errors": {
+    "boundary": {
+      "dialog": {
+        "title": "¡Error!",
+        "description": "Hubo un error inesperado. Se detalla a continuación."
+      }
+    }
+  },
+  "weather": {
+    "cities": {
+      "current": "Posición actual",
+      "buenosaires": "Buenos Aires",
+      "newyork": "Nueva York",
+      "barcelona": "Barcelona",
+      "hongkong": "Hong Kong",
+      "sidney": "Sidney"
+    },
+    "cityDetails": {
+      "wind": "Viento",
+      "feelsLike": "Sensación térmica",
+      "subheader": "en la ciudad de {{city}}.",
+      "subheaderCurrentPosition": "en tu posición actual."
+    },
+    "buttons": {
+      "selectCity": "Seleccionar ciudad"
+    }
+  },
+  "shared": {
+    "buttons": {
+      "cancel": "Cancelar"
+    }
+  }
+}

@@ -7,6 +7,8 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import { List, ListItem, ListItemText } from '@material-ui/core';
 import { useWeather } from '../../context/weather';
 import { City } from '../../types';
+import { useTranslation } from 'react-i18next';
+import { getCountryEmoji } from '../utils/functions';
 
 interface SelectCityDialog {
   open: boolean;
@@ -16,6 +18,7 @@ interface SelectCityDialog {
 const CityCodes: City[] = ['current', 'buenosaires', 'newyork', 'barcelona', 'hongkong', 'sidney'];
 
 const SelectCityDialog = ({ open, setOpen }: SelectCityDialog) => {
+  const { t } = useTranslation();
   const { selectCity } = useWeather();
   const handleSelectCity = (city: City) => {
     selectCity(city);
@@ -29,14 +32,14 @@ const SelectCityDialog = ({ open, setOpen }: SelectCityDialog) => {
         <List disablePadding>
           {CityCodes.map(city => (
             <ListItem button key={city} onClick={() => handleSelectCity(city)}>
-              <ListItemText primary={city} />
+              <ListItemText primary={`${getCountryEmoji(city)} ${t(`weather.cities.${city}`)}`} />
             </ListItem>
           ))}
         </List>
       </DialogContent>
       <DialogActions>
         <Button onClick={() => setOpen(false)} color="primary" autoFocus>
-          Cancelar
+          {t('shared.buttons.cancel')}
         </Button>
       </DialogActions>
     </Dialog>

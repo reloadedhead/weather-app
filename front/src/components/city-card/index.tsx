@@ -10,6 +10,7 @@ import { useFadedShadowStyles } from '@mui-treasury/styles/shadow/faded';
 import { useGutterBorderedGridStyles } from '@mui-treasury/styles/grid/gutterBordered';
 import WbSunnyIcon from '@material-ui/icons/WbSunny';
 import { useWeather } from '../../context/weather';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles(({ palette }) => ({
   card: {
@@ -52,12 +53,13 @@ const useStyles = makeStyles(({ palette }) => ({
 
 export const CityCard = () => {
   const styles = useStyles();
+  const { t } = useTranslation();
   const shadowStyles = useFadedShadowStyles();
   const borderedGridStyles = useGutterBorderedGridStyles({
     borderColor: 'rgba(0, 0, 0, 0.08)',
     height: '50%',
   });
-  const { currentWeather } = useWeather();
+  const { currentWeather, city } = useWeather();
   return (
     <Card className={cx(styles.card, shadowStyles.root)}>
       <CardContent>
@@ -67,18 +69,23 @@ export const CityCard = () => {
         <h3 className={styles.heading}>
           {(currentWeather && `${currentWeather.currentTemperature.toFixed(1)}°C`) || ''}
         </h3>
-        <span className={styles.subheader}>en la ciudad de Tandil</span>
+        <span className={styles.subheader}>
+          {city &&
+            (city !== 'current'
+              ? t('weather.cityDetails.subheader', { city: t(`weather.cities.${city}`) })
+              : t('weather.cityDetails.subheaderCurrentPosition'))}
+        </span>
       </CardContent>
       <Divider light />
       <Box display={'flex'}>
         <Box p={2} flex={'auto'} className={borderedGridStyles.item}>
-          <p className={styles.statLabel}>Viento</p>
+          <p className={styles.statLabel}>{t('weather.cityDetails.wind')}</p>
           <p className={styles.statValue}>
             {(currentWeather && `${currentWeather.wind.toFixed(1)} KM/h`) || ''}
           </p>
         </Box>
         <Box p={2} flex={'auto'} className={borderedGridStyles.item}>
-          <p className={styles.statLabel}>Sensación térmica</p>
+          <p className={styles.statLabel}>{t('weather.cityDetails.feelsLike')}</p>
           <p className={styles.statValue}>
             {(currentWeather && `${currentWeather.feelsLike.toFixed(1)}°C`) || ''}
           </p>

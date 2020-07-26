@@ -39,6 +39,7 @@ export const WeatherProvider = ({ children }: WeatherProvider) => {
         latitude: currentPosition.coords.latitude,
         longitude: currentPosition.coords.longitude,
       });
+      setCity('current');
     };
     const onError = (error: PositionError) => {
       console.log(error);
