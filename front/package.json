@@ -24,14 +24,18 @@
     "react-i18next": "^11.7.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
+    "react-use-is-online": "^1.0.3",
     "typescript": "~3.7.2"
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build && npm run build-sw && npm run clean-cra-sw",
+    "build-sw": "node ./src/sw-build.js",
+    "clean-cra-sw": "rm -f build/precache-manifest.*.js",
     "test": "react-scripts test",
     "lint": "tsc --noEmit && eslint '*/**/*.{js,ts}' --quiet --fix",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "serve": "serve -l ${PORT:-4000} -s build"
   },
   "eslintConfig": {
     "extends": "react-app"

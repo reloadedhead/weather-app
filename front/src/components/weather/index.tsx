@@ -6,6 +6,7 @@ import LocationOnIcon from '@material-ui/icons/LocationOn';
 import { useWeather } from '../../context/weather';
 import SelectCityDialog from '../dialogs/select-city';
 import { useTranslation } from 'react-i18next';
+import { useIsOnline } from 'react-use-is-online';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -25,6 +26,7 @@ const Weather = () => {
   const [openDialog, setOpenDialog] = useState(false);
   const { city } = useWeather();
   const { t } = useTranslation();
+  const { isOnline } = useIsOnline();
   return (
     <div>
       <Grid container item xs={12}>
@@ -35,7 +37,13 @@ const Weather = () => {
           <ForecastCard />
         </Grid>
       </Grid>
-      <Fab className={classes.fab} color="secondary" variant="extended" onClick={() => setOpenDialog(true)}>
+      <Fab
+        disabled={!isOnline}
+        className={classes.fab}
+        color="secondary"
+        variant="extended"
+        onClick={() => setOpenDialog(true)}
+      >
         <LocationOnIcon />
         {(city && t(`weather.cities.${city}`)) || t('weather.buttons.selectCity')}
       </Fab>
