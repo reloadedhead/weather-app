@@ -3,6 +3,9 @@ import { Weather, Forecast, CompleteWeatherResponse, City } from '../types';
 import Api from '../services/api';
 import { fromUnixTime } from 'date-fns';
 import { getCoordinatesForCity } from '../components/utils/functions';
+import { useAlert } from './alert';
+import { useTranslation } from 'react-i18next';
+import { AxiosError } from 'axios';
 
 interface WeatherContext {
   city?: City;
@@ -32,6 +35,8 @@ export const WeatherProvider = ({ children }: WeatherProvider) => {
   const [currentWeather, setCurrentWeather] = useState<Weather>();
   const [forecast, setForecast] = useState<Forecast[]>();
   const [loading, setLoading] = useState(false);
+  const { showAlert } = useAlert();
+  const { t } = useTranslation();
 
   const setCoordinatesFromDevice = () => {
     const onSuccess = (currentPosition: Position) => {
@@ -42,13 +47,14 @@ export const WeatherProvider = ({ children }: WeatherProvider) => {
       setCity('current');
     };
     const onError = (error: PositionError) => {
-      console.log(error);
+      showAlert(t('errors.geolocation.title'), t('errors.geolocation.message', { detail: error.message }));
     };
     navigator.geolocation.getCurrentPosition(onSuccess, onError);
   };
 
   useEffect(() => {
     setCoordinatesFromDevice();
+    // eslint-disable-next-line
   }, []);
 
   const setCompleteWeatherResponse = (response: CompleteWeatherResponse) => {
@@ -78,7 +84,7 @@ export const WeatherProvider = ({ children }: WeatherProvider) => {
         const weatherResponse = (await Api.getCompleteWeatherByCoordinates(coordinates!)).data;
         setCompleteWeatherResponse(weatherResponse);
       } catch (error) {
-        console.log(error);
+        showAlert(t('errors.api.title'), t('errors.api.message', { detail: (error as AxiosError).message }));
       } finally {
         setLoading(false);
       }
@@ -87,7 +93,7 @@ export const WeatherProvider = ({ children }: WeatherProvider) => {
     if (coordinates) {
       fetchByCoordinates();
     }
-  }, [coordinates]);
+  }, [coordinates, showAlert, t]);
 
   const selectCity = (selectedCity: City) => {
     setCity(selectedCity);

@@ -10,17 +10,20 @@ import { WeatherProvider } from './context/weather';
 import axiosConfig from './axios-config';
 import i18n from './i18n';
 import { I18nextProvider } from 'react-i18next';
+import { AlertProvider } from './context/alert';
 
 const App = () => (
   <React.StrictMode>
     <ErrorBoundary FallbackComponent={ErrorFallback}>
       <Suspense fallback={<LoadingPage />}>
         <I18nextProvider i18n={i18n}>
-          <WeatherProvider>
-            <AppShell>
-              <Router />
-            </AppShell>
-          </WeatherProvider>
+          <AlertProvider>
+            <WeatherProvider>
+              <AppShell>
+                <Router />
+              </AppShell>
+            </WeatherProvider>
+          </AlertProvider>
         </I18nextProvider>
       </Suspense>
     </ErrorBoundary>

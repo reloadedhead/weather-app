@@ -11,6 +11,7 @@ import { useGutterBorderedGridStyles } from '@mui-treasury/styles/grid/gutterBor
 import { useWeather } from '../../context/weather';
 import { useTranslation } from 'react-i18next';
 import { CircularProgress } from '@material-ui/core';
+import ErrorIcon from '@material-ui/icons/Error';
 
 const useStyles = makeStyles(({ palette }) => ({
   card: {
@@ -68,7 +69,7 @@ export const CityCard = () => {
           className={styles.avatar}
           src={showIcon ? `http://openweathermap.org/img/wn/${currentWeather!.icon}@2x.png` : undefined}
         >
-          <CircularProgress />
+          {loading ? <CircularProgress /> : <ErrorIcon />}
         </Avatar>
         <h3 className={styles.heading}>
           {(currentWeather && `${currentWeather.currentTemperature.toFixed(1)}°C`) || ''}
