@@ -1,44 +1,45 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Weather App Front End
+
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). It implements [MaterialUI](https://http://material-ui.com) design framework and consumes [OpenWeatherMap](https://openweathermap.org/api) API if no custom endpoints are passed as eviroment variables. 
+
+## Design
+* This app is design with an **offline-first** approach. A custom service worker is implemented for offline use and increased performance. This service worker caches static resources as JavaScript chunks and CSS files for quick loading. It also caches API requests for 15 minutes (asuming weather doesn't change in a 15 minute window 😅, this can be changed). It also allows the user to install the app in mobile or compatible desktop browsers such as Firefox or every Chromium-based browser.
+* The weather component is lazy loaded, allowing the app to load first the AppShell (JS and CSS for layout and header).
+* It uses TypeScript for development because although non-typed languages are agile, they can get real messy.
+* It follows state-of-the-art React design patterns, such as stateless Functional Components and Context Providers with custom hooks. Centralized stores like Redux can be useful in big apps, not quite handy in small concepts.
+
+## Libraries used
+Some helpful libraries are used in this project, mainly to reduce boilerplate. 
+* Axios: Promise based HTTP client for the browser and node.js. Provides nice interfaces for error handling and request interceptors.
+* React-Testing-Library: for testing purposes.
+* date-fns: Date object toolbox.
+* React-Router: render components via custom routes. Useful with lazy loading.
+* React-Use-Is-Online: Nice hook for online/offline checks. (Side note: this is not ideal. This hook make use of navigator.isOnLine).
+* React-Error-Boundary: Reduces boilerplate for Error Boundaries.
+* react-i18n: localization.
+* Eslint, Prettier and Husky: tools for project organization and code look.
+
+## How to try
+Run `yarn install` or `npm i` to install dependencies, `yarn build` or `npm build` to build the front-end and `yarn serve` or `npm serve` to serve the project on `localhost:4000`.
 
 ## Available Scripts
 
 In the project directory, you can run:
 
-### `yarn start`
+* `yarn start`
+Runs the app in the development mode. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+* `yarn test`
+Launches the test runner in the interactive watch mode. See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+* `yarn build`
+Builds the app for production to the `build` folder. It correctly bundles React in production mode and optimizes the build for the best performance. The build is minified and the filenames include the hashes.
+* `build-sw and clean-cra-sw`
+This scripts are used to build the custom service worker under ### `sw-custom.js` for SW design and `sw-buid,js` node script, and removing CRA sw.
+*  `yarn serve`
+Serves the built project under `/build` directory on port 4000.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
-
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Notes
+* This app has 5 cities hard-coded. This is clearly **bad design**, only for demo purposes and should never get to production.
+* It uses the browser's Geolocation API to get the user's current location to fetch weather. This should be prompted before firing up the browser's prompt. Browsers like Safari have this feature turned off by default.
+* A ready-to-ship app should have a mechanism to warn the user a new service worker has been activated and new features are ready. See `/serviceWorker.ts` file.
+* There are two extremely simple tests, as this is a simple demo.
+* OpenWeatherMap's AppID is also hard-coded and also **bad design**. This is only for testing purposes and hashes such as keys, IDs or tokens should **never** be versioned.
