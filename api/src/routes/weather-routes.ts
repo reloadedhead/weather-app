@@ -1,7 +1,8 @@
 import { Router } from 'express';
 import { ParamsDictionary } from 'express-serve-static-core';
 import Weather from '../entities/Weather';
-import WeatherController from '../controllers/WeatherController';
+import { WeatherController } from '../controllers';
+
 
 const weatherRoutes = Router({ mergeParams: true });
 
