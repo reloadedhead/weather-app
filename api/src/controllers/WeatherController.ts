@@ -1,8 +1,7 @@
 import { Request, Response } from "express";
-import Weather from "../entities/Weather";
-import weatherResponseMock from "../mocks/Weather";
 import InvalidCity from "../exceptions/InvalidCity";
 import getWeatherResponse from "../mocks/functions";
+import { Weather } from "../entities";
 
 class WeatherController {
   static getCurrentWeather = (req: Request, res: Response<Weather | string>) => {
